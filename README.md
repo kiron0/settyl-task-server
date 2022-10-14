@@ -1,1 +1,1 @@
-> # Node MongoDB MVC
+> # Settyl Assignment API
