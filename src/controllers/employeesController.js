@@ -33,17 +33,18 @@ const createEmployee = async (req, res) => {
 
 // update employee by id with patch method
 const updateEmployee = async (req, res) => {
-  try {
-    const employee = await employees.updateOne(
-      { _id: ObjectId(req.params.id) },
-      { $set: req.body },
-      { upsert: true }
-    );
-    res.status(200).send(employee);
-  } catch (error) {
-    res.status(500).send(error);
+  const body = req.body;
+  const query = { _id: ObjectId(req.params.id) };
+  const options = { upsert: true };
+  const updateDoc = {
+    $set: body,
+  };
+  const result = await employees.updateOne(query, updateDoc, options);
+  if (result.modifiedCount === 1) {
+    res.send({ success: true, message: "Update Employee data successfully" });
+  } else {
+    res.status(403).send({ success: false, message: "Forbidden request" });
   }
-  console.log(req.body);
 };
 
 const deleteEmployee = async (req, res) => {
