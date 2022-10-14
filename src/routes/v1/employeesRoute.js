@@ -10,7 +10,7 @@ const {
 router.get("/employees", getEmployees);
 router.get("/employees/:id", getEmployeeById);
 router.post("/employees", createEmployee);
-router.put("/employees/:id", updateEmployee);
+router.patch("/employees/:id", updateEmployee);
 router.delete("/employees/:id", deleteEmployee);
 
 module.exports = router;

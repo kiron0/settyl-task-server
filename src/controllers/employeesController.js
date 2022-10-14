@@ -31,16 +31,19 @@ const createEmployee = async (req, res) => {
   }
 };
 
+// update employee by id with patch method
 const updateEmployee = async (req, res) => {
   try {
     const employee = await employees.updateOne(
       { _id: ObjectId(req.params.id) },
-      { $set: req.body }
+      { $set: req.body },
+      { upsert: true }
     );
     res.status(200).send(employee);
   } catch (error) {
     res.status(500).send(error);
   }
+  console.log(req.body);
 };
 
 const deleteEmployee = async (req, res) => {
